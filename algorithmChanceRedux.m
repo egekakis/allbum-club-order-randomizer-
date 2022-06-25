@@ -1,8 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 %algorithmChanceRedux
 %Eamon Gekakis
-%7/17/21
-%For Album Club Season 2
+%Rev 1 - 7/17/21
+%Rev 2 - 6/25/22
+%For Album Club Redux
 %%%%%%%%%%%%%%%%%%%%%%%%
 clear 
 close all
@@ -13,7 +14,7 @@ load albumClubMembers.mat
 [randNum] = randomizer();
 [seed] = whileLooper(albumClubMembers,randNum);
 rng(seed,'twister');
-[season2Order] = matchNsift(albumClubMembers);
+[pickingOrder] = matchNsift(albumClubMembers);
 toc
 
 function [seed] = randomSeedGenerator(albumClubMembers)
@@ -66,8 +67,8 @@ end
 seed = round(mean(seedMat)); %creates seed from average of all seeds in seedMat
 end
 
-function [season2Order] = matchNsift(albumClubMembers)
+function [pickingOrder] = matchNsift(albumClubMembers)
 albumClubMembers(:,2) = num2cell(rand(length(albumClubMembers),1)); %now with the randomized seed, rand is used to generate random values
-season2Order = sortrows(albumClubMembers,2,'descend'); %sorts by highest values matched to name
-display(season2Order) %displays results
+pickingOrder = sortrows(albumClubMembers,2,'descend'); %sorts by highest values matched to name
+disp(pickingOrder) %displays results
 end
